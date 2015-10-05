@@ -6,13 +6,29 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\sprWorker</sprite>
-    <sprite>sprites\sprFighter</sprite>
-    <sprite>sprites\sprMask</sprite>
-    <sprite>sprites\sprTarget</sprite>
-    <sprite>sprites\sprMouse</sprite>
+    <sprites name="control">
+      <sprite>sprites\sprMouse</sprite>
+      <sprite>sprites\sprMask</sprite>
+      <sprite>sprites\sprTarget</sprite>
+    </sprites>
+    <sprites name="units - infantry">
+      <sprite>sprites\sprRifle</sprite>
+      <sprite>sprites\sprRifleAttack</sprite>
+      <sprite>sprites\sprRifleDeath</sprite>
+      <sprite>sprites\sprRifleIdle</sprite>
+      <sprite>sprites\sprRifleMove</sprite>
+      <sprite>sprites\sprWorker</sprite>
+      <sprite>sprites\sprWorkerAttack</sprite>
+      <sprite>sprites\sprWorkerDeath</sprite>
+      <sprite>sprites\sprWorkerIdle</sprite>
+      <sprite>sprites\sprWorkerMove</sprite>
+    </sprites>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bg_ground</background>
+    <background>background\bg_shore</background>
+    <background>background\bg_water</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="control">
@@ -30,6 +46,7 @@
   </scripts>
   <objects name="objects">
     <objects name="Controllers">
+      <object>objects\objLevelController</object>
       <object>objects\objViewController</object>
       <object>objects\objMouse</object>
       <object>objects\objTarget</object>
@@ -47,8 +64,13 @@
   <rooms name="rooms">
     <room>rooms\rmTest</room>
   </rooms>
-  <constants number="1">
+  <constants number="6">
+    <constant name="GROUND">-5</constant>
     <constant name="TILESIZE">32</constant>
+    <constant name="SHORE">-6</constant>
+    <constant name="WATER">-7</constant>
+    <constant name="CLIFF">-8</constant>
+    <constant name="CLIFFTOP">-9</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

@@ -48,11 +48,11 @@ unitStat[count,count2] = 'noncombat'        //unitType
 count2++;
 unitStat[count,count2] = sprWorkerIdle;     //idleSprite
 count2++;
-unitStat[count,count2] = sprWorkerAtk;      //atkSprite
+unitStat[count,count2] = sprWorkerAttack;      //atkSprite
 count2++;
 unitStat[count,count2] = sprWorkerMove;     //moveSprite
 count2++;
-unitStat[count,count2] = sprWorkerDead;     //deadSprite;
+unitStat[count,count2] = sprWorkerDeath;     //deadSprite;
 count2++;
 
 //  Rifle Soldier - 1
@@ -76,11 +76,11 @@ unitStat[count,count2] = 'combat'        //unitType
 count2++;
 unitStat[count,count2] = sprRifleIdle;     //idleSprite
 count2++;
-unitStat[count,count2] = sprRifleAtk;      //atkSprite
+unitStat[count,count2] = sprRifleAttack;      //atkSprite
 count2++;
 unitStat[count,count2] = sprRifleMove;     //moveSprite
 count2++;
-unitStat[count,count2] = sprRifleDead;     //deadSprite;
+unitStat[count,count2] = sprRifleDeath;     //deadSprite;
 count2++;
 
 </string>
