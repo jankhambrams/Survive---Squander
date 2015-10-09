@@ -52,6 +52,8 @@
   </views>
   <instances>
     <instance objName="objLevelController" x="32" y="128" name="inst_2D9BC3F2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objPlayerSpawner" x="160" y="128" name="inst_4CBA9A67" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objEnemySpawner" x="1088" y="1056" name="inst_285F2F31" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

@@ -8,6 +8,7 @@ selected = false;
 faction = -1;
 state = idle_state;
 canShoot = true;
+depth = -10;
 
 //  Specific Variables
 var count = 0;

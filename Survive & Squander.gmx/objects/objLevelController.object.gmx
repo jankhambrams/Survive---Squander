@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>10</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -31,14 +31,14 @@ room_width = TILESIZE / 16 * 720;
 room_height = TILESIZE / 16 * 720;
 
 //  Set the grid width and height
-var width = room_width div TILESIZE;
-var height = room_width div TILESIZE;
+width = room_width div TILESIZE;
+height = room_width div TILESIZE;
 
 //  Create the grid
-grid = ds_grid_create(width, height);
+terrain = ds_grid_create(width, height);
 
 //  Fill the grid with water
-ds_grid_set_region(grid, 0, 0, width - 1, height - 1, WATER);
+ds_grid_set_region(terrain, 0, 0, width - 1, height - 1, WATER);
 
 //  Randomize the seed
 randomize();
@@ -57,7 +57,7 @@ var odds = 1;
 repeat 1000
 {
     //  Place a ground tile at the controller position
-    grid[# cx, cy] = GROUND;
+    terrain[# cx, cy] = GROUND;
     
     //  Randomize the direction of the controller
     if irandom(odds) == odds
@@ -79,16 +79,16 @@ for (var yy = 1; yy &lt; height - 1; yy++)
 {
     for (var xx = 1; xx &lt; width - 1; xx++)
     {
-        if grid[#xx, yy] = GROUND
+        if terrain[#xx, yy] = GROUND
         {
-            if grid[# xx + 1, yy] != GROUND grid[# xx + 1, yy] = SHORE;    //right
-            if grid[# xx - 1, yy] != GROUND grid[# xx - 1, yy] = SHORE;    //left
-            if grid[# xx, yy + 1] != GROUND grid[# xx, yy + 1] = SHORE;    //bottom
-            if grid[# xx, yy - 1] != GROUND grid[# xx, yy - 1] = SHORE;    //top
-            if grid[# xx + 1, yy + 1] != GROUND grid[# xx + 1, yy + 1] = SHORE; //bottom right
-            if grid[# xx + 1, yy - 1] != GROUND grid[# xx + 1, yy - 1] = SHORE; //top right
-            if grid[# xx - 1, yy + 1] != GROUND grid[# xx - 1, yy + 1] = SHORE; //bottom left
-            if grid[# xx - 1, yy - 1] != GROUND grid[# xx - 1, yy - 1] = SHORE; //top left
+            if terrain[# xx + 1, yy] != GROUND terrain[# xx + 1, yy] = SHORE;    //right
+            if terrain[# xx - 1, yy] != GROUND terrain[# xx - 1, yy] = SHORE;    //left
+            if terrain[# xx, yy + 1] != GROUND terrain[# xx, yy + 1] = SHORE;    //bottom
+            if terrain[# xx, yy - 1] != GROUND terrain[# xx, yy - 1] = SHORE;    //top
+            if terrain[# xx + 1, yy + 1] != GROUND terrain[# xx + 1, yy + 1] = SHORE; //bottom right
+            if terrain[# xx + 1, yy - 1] != GROUND terrain[# xx + 1, yy - 1] = SHORE; //top right
+            if terrain[# xx - 1, yy + 1] != GROUND terrain[# xx - 1, yy + 1] = SHORE; //bottom left
+            if terrain[# xx - 1, yy - 1] != GROUND terrain[# xx - 1, yy - 1] = SHORE; //top left
         }
     }
 }
@@ -98,17 +98,17 @@ for (var yy = 1; yy &lt; height - 1; yy++)
     for (var xx = 1; xx &lt; width - 1; xx++)
     {
         //  Draw the ground
-        if grid[# xx, yy] = GROUND
+        if terrain[# xx, yy] = GROUND
         {
             tile_add(bg_ground, 0, 0, TILESIZE, TILESIZE, xx * TILESIZE, yy * TILESIZE, 0);
         }
         //  Draw the shore
-        else if grid[# xx, yy] = SHORE
+        else if terrain[# xx, yy] = SHORE
         {
             tile_add(bg_shore, 0, 0, TILESIZE, TILESIZE, xx * TILESIZE, yy * TILESIZE, 0);
         }
         //  Draw the water
-        else if grid[# xx, yy] = WATER
+        else if terrain[# xx, yy] = WATER
         {
             tile_add(bg_water, 0, 0, TILESIZE, TILESIZE, xx * TILESIZE, yy * TILESIZE, 0);
         }
@@ -146,6 +146,46 @@ instance_create(rx, ry, objPlayerSpawner);
 rx = room_width - rx;
 ry = room_height - ry;
 instance_create(rx, ry, objEnemySpawner);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Refresh Passable Grid
+//  Create motion planning grid
+global.passable = mp_grid_create(0, 0, width, height, TILESIZE, TILESIZE);
+
+//  Add all Units to Grid
+mp_grid_add_instances(global.passable, objUnitParent, true);
+
+//  Add non-passable terrain to grid
+for (var xx = 0; xx &lt; width; xx++)
+{
+    for (var yy = 0; yy &lt; height; yy++)
+    {
+        if terrain[# xx, yy] != GROUND &amp;&amp; terrain[# xx, yy] != SHORE
+        {
+            mp_grid_add_cell(global.passable, xx, yy);
+        }
+    }
+}
 </string>
           </argument>
         </arguments>
